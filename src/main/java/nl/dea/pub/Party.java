@@ -18,7 +18,11 @@ public class Party {
         drinkers.add(new BeerDrinker("Leon", grolsch));
         drinkers.add(new BeerDrinker("Anne", grolsch));
 
-        // Create and start the threads
-        drinkers.forEach(drinker -> new Thread(drinker).start());
+        // Start drinking
+        while (grolsch.getRemainingVolume() > 0) {
+            drinkers.forEach(drinker -> drinker.tapBeer());
+        }
+
+        drinkers.forEach(drinker -> drinker.goHome());
     }
 }

@@ -1,6 +1,6 @@
 package nl.dea.pub;
 
-public class BeerDrinker implements Runnable {
+public class BeerDrinker {
 
     private static final int VOLUME_GLAS = 200;
     private String name;
@@ -16,21 +16,9 @@ public class BeerDrinker implements Runnable {
     public void tapBeer() {
         consumedBeer += keg.tap(VOLUME_GLAS);
         System.out.println(this.name + " tapped a glas.");
-
     }
 
-    public void run() {
-        while (keg.getRemainingVolume() > 0) {
-            tapBeer();
-            try {
-                // drink
-                Thread.sleep(20);
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
+    public void goHome() {
         System.out.println(this.name + " drank " + consumedBeer + "ml.");
     }
 }
