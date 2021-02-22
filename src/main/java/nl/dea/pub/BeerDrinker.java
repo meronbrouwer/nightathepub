@@ -3,7 +3,7 @@ package nl.dea.pub;
 public class BeerDrinker implements Runnable {
 
     private static final int VOLUME_GLAS = 200;
-    private String name;
+    private final String name;
     private final Keg keg;
 
     private int consumedBeer = 0;
@@ -13,15 +13,10 @@ public class BeerDrinker implements Runnable {
         this.name = name;
     }
 
-    public void tapBeer() {
-        consumedBeer += keg.tap(VOLUME_GLAS);
-        System.out.println(this.name + " tapped a glas.");
-
-    }
-
-    public void run() {
+    public void startDrinking() {
         while (keg.getRemainingVolume() > 0) {
-            tapBeer();
+            consumedBeer += keg.tap(VOLUME_GLAS);
+            System.out.println(this.name + " tapped a glas.");
             try {
                 // drink
                 Thread.sleep(20);
@@ -32,5 +27,10 @@ public class BeerDrinker implements Runnable {
         }
 
         System.out.println(this.name + " drank " + consumedBeer + "ml.");
+
+    }
+
+    public void run() {
+        startDrinking();
     }
 }
