@@ -2,8 +2,7 @@ package nl.dea.pub;
 
 public class BeerDrinker {
 
-    private static final int VOLUME_GLAS = 200;
-    private String name;
+    private final String name;
     private final Keg keg;
 
     private int consumedBeer = 0;
@@ -13,12 +12,12 @@ public class BeerDrinker {
         this.name = name;
     }
 
-    public void tapBeer() {
-        consumedBeer += keg.tap(VOLUME_GLAS);
-        System.out.println(this.name + " tapped a glas.");
-    }
+    public void startDrinking() {
+        while (keg.getRemainingVolume() > 0) {
+            consumedBeer += keg.tap(200);
+            System.out.println(this.name + " tapped a glas.");
+        }
 
-    public void goHome() {
         System.out.println(this.name + " drank " + consumedBeer + "ml.");
     }
 }
